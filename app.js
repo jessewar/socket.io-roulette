@@ -13,10 +13,11 @@ var app = express();
 var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 
+// Chat Rooms
 var nameToSocket = {};
 var waiter = "";
 
-io.sockets.on('connection', function(socket)) {
+io.sockets.on('connection', function(socket) {
 
 	socket.on('addUser', function(userName) {
 		nameToSocket.userName = socket; // add name and socket to map
@@ -25,7 +26,7 @@ io.sockets.on('connection', function(socket)) {
 		} else {
 			var person1 = waiter;
 			var person2 = username;
-			waiter = "";  
+			waiter = "";
 
 			var socket1 = nameToSocket.person1;
 			var socket2 = nameToSocket.person2;
@@ -44,7 +45,7 @@ io.sockets.on('connection', function(socket)) {
 //	socket.on('disconnect', function(userName) {
 //
 //	});
-}
+});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -65,6 +66,6 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+// http.createServer(app).listen(app.get('port'), function(){
+//   console.log('Express server listening on port ' + app.get('port'));
+// });

@@ -3,9 +3,17 @@ $(function () {
 	var $chatInput = $('.chatInput');
 	var $chatArea = $('.chatArea');
 
+	// Init
+	$chatInput.focus();
+	var socket = io.connect('//0.0.0.0:3000');
+	socket.on('connect', function(){
+		sendMessage('socket.io', 'Socket Power!');
+		socket.emit('addUser', username);
+	});
+
 	// Events
 	$(window).keypress(function (e) {
-		var enter = e.keyCode === 13;
+		var enter = e.keyCode === 13; // Enter
 		if (enter) {
 			var text = $chatInput.val();
 			$chatInput.val('');
@@ -17,9 +25,12 @@ $(function () {
 		$chatInput.focus();
 	});
 
+
+	// Sends message to other user
 	function sendMessage (message) {
 		// Socketio stuff
 		postMessage(username, message);
+
 	}
 
 	function postMessage (username, message) {
@@ -29,8 +40,6 @@ $(function () {
 		$chatArea.find('.messages').append($message);
 
 		// Scroll to bot
-		$chatArea.stop().animate({
-			scrollTop: $chatArea.scrollHeight
-		}, 800);
+		$chatArea[0].scrollTop = $chatArea[0].scrollHeight;
 	}
 });
