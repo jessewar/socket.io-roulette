@@ -5,12 +5,18 @@
 html, body {
 	width: 100%;
 	height: 100%;
+
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	color: rgb(215, 215, 215);
+
 	background-color: rgb(32, 32, 32);
 }
 
-a {
-  color: #00B7FF;
+ul {
+    list-style-type: none;
+}
+li {
+	overflow: hidden;
 }
 
 /* Structure */
@@ -32,6 +38,7 @@ a {
 .chatArea {
 	height: calc(100% - 40px);
 	border-bottom: 2px solid gray;
+	overflow-y: scroll;
 }
 .inputArea {
 	height: 40px;
@@ -41,7 +48,7 @@ a {
 	height: 100%;
 
 	font-size: 25px;
-	color: rgb(203, 203, 203);
+	color: rgb(215, 215, 215);
 	padding: 5px;
 
 	background-color: black;
@@ -49,4 +56,17 @@ a {
 }
 .chatInput:focus {
     outline-width: 0;
+}
+
+/* Message Area */
+.username, .messageArea {
+	float: left;
+	padding: 10px;
+}
+.username {
+	text-align: right;
+	width: 20%;
+}
+.messageArea {
+	width: 80%;
 }

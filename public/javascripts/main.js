@@ -1,6 +1,7 @@
 $(function () {
 	var username = prompt('Type a username');
 	var $chatInput = $('.chatInput');
+	var $chatArea = $('.chatArea');
 
 	// Events
 	$(window).keypress(function (e) {
@@ -24,9 +25,12 @@ $(function () {
 	function postMessage (username, message) {
 		var $usernameArea = $('<div/>').addClass('username').html(username);
 		var $messageArea = $('<div/>').addClass('messageArea').html(message);
-		$('<li/>').html($usernameArea + $messageArea);
-		// $('.chatArea').append()
+		var $message = $('<li/>').append([$usernameArea, $messageArea]);
+		$chatArea.find('.messages').append($message);
 
 		// Scroll to bot
+		$chatArea.stop().animate({
+			scrollTop: $chatArea.scrollHeight
+		}, 800);
 	}
 });
