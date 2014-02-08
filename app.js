@@ -19,19 +19,23 @@ var waiter = "";
 io.sockets.on('connection', function(socket)) {
 
 	socket.on('addUser', function(userName) {
-		nameToSocket.userName = socket; // add name and socket to map
-		if (waiter === "") {
-			waiter = userName;
+		if (nameTaken(userName)) {  // username already exists
+			socket.emit('nameTaken', userName);
 		} else {
-			var person1 = waiter;
-			var person2 = username;
-			waiter = "";  
+			nameToSocket.userName = socket; // add name and socket to map
+			if (waiter === "") {
+				waiter = userName;
+			} else {
+				var person1 = waiter;
+				var person2 = username;
+				waiter = "";  
 
-			var socket1 = nameToSocket.person1;
-			var socket2 = nameToSocket.person2;
+				var socket1 = nameToSocket.person1;
+				var socket2 = nameToSocket.person2;
 
-			socket1.emit('matched', person2);
-			socket2.emit('matched', person1);
+				socket1.emit('matched', person2);
+				socket2.emit('matched', person1);
+			}
 		}
 	});
 
@@ -40,6 +44,14 @@ io.sockets.on('connection', function(socket)) {
 
 		userSocket.emit('newMessage', data);
 	});
+
+	function nameTaken(name) {
+		if (nameToSocket.name === null) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 //	socket.on('disconnect', function(userName) {
 //
