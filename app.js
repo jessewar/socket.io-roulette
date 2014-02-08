@@ -18,11 +18,10 @@ var nameToSocket = {};
 var waiter = "";
 
 io.sockets.on('connection', function(socket) {
-
-	socket.on('addUser', function(userName) {
-		nameToSocket.userName = socket; // add name and socket to map
+	socket.on('addUser', function(username) {
+		nameToSocket.username = socket; // add name and socket to map
 		if (waiter === "") {
-			waiter = userName;
+			waiter = username;
 		} else {
 			var person1 = waiter;
 			var person2 = username;
@@ -42,7 +41,7 @@ io.sockets.on('connection', function(socket) {
 		userSocket.emit('newMessage', data);
 	});
 
-//	socket.on('disconnect', function(userName) {
+//	socket.on('disconnect', function(username) {
 //
 //	});
 });
