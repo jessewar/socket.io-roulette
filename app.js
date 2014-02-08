@@ -10,6 +10,41 @@ var http = require('http');
 var path = require('path');
 
 var app = express();
+var server = app.listen(3000);
+var io = require('socket.io').listen(server);
+
+var nameToSocket = {};
+var waiter = "";
+
+io.sockets.on('connection', function(socket)) {
+
+	socket.on('addUser', function(userName) {
+		nameToSocket.userName = socket; // add name and socket to map
+		if (waiter === "") {
+			waiter = userName;
+		} else {
+			var person1 = waiter;
+			var person2 = username;
+			waiter = "";  
+
+			var socket1 = nameToSocket.person1;
+			var socket2 = nameToSocket.person2;
+
+			socket1.emit('matched', person2);
+			socket2.emit('matched', person1);
+		}
+	});
+
+	socket.on('sendMessage', function(user, data) {
+		var userSocket = nameToSocket.user;
+
+		userSocket.emit('newMessage', data);
+	});
+
+//	socket.on('disconnect', function(userName) {
+//
+//	});
+}
 
 // all environments
 app.set('port', process.env.PORT || 3000);
