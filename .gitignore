@@ -1,0 +1,16 @@
+# Numerous always-ignore extensions
+*.log
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Folders to ignore
+.idea
+docs
+jsdoc-toolkit
+temp
+/node_modules
+npm-debug.log
