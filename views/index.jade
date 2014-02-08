@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	div.left
+		div.chatArea
+			ol.messages
+		div.inputArea
+			input.chatInput(type='text')
+	div.right

@@ -1,8 +1,52 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	background-color: rgb(32, 32, 32);
 }
 
 a {
   color: #00B7FF;
+}
+
+/* Structure */
+.left, .right {
+	height: 100%;
+}
+.left {
+	width: 80%;
+	float: left;
+}
+.right {
+	width: 20%;
+	float: right;
+	background-color: black;
+	border-left: 2px solid gray;
+}
+
+/* Chat area */
+.chatArea {
+	height: calc(100% - 40px);
+	border-bottom: 2px solid gray;
+}
+.inputArea {
+	height: 40px;
+}
+.chatInput {
+	width: 100%;
+	height: 100%;
+
+	font-size: 25px;
+	color: rgb(203, 203, 203);
+	padding: 5px;
+
+	background-color: black;
+	border: none;
+}
+.chatInput:focus {
+    outline-width: 0;
 }
